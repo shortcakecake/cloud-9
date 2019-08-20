@@ -1,4 +1,18 @@
 var username = prompt("Preferred Name:");
+if (username == null)
+{
+  alert("Username must not be empty.");
+  location.reload();
+}else if (username == "")
+{
+  alert("Username must not be empty.");
+  location.reload();
+}else if (username.includes(" ") == true)
+{
+  alert("Username are not allowed to have spaces in them.");
+  location.reload();
+}
+  
 const CLIENT_ID = 'mWce2OJGr3nCwHSm';
 
 const drone = new ScaleDrone(CLIENT_ID, {
