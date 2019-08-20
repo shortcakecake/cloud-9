@@ -118,7 +118,7 @@ function updateMembersDOM() {
 function createMessageElement(text, member) {
   const el = document.createElement('div');
   el.appendChild(createMemberElement(member));
-  const colon = document.creatElement('div');
+  const colon = document.createElement('div');
   colon.className = "member";
   colon.innerText = ": ";
   el.appendChild(document.createTextNode(text));
