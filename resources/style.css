@@ -10,16 +10,16 @@ body {
     .members-count,
     .members-list,
     .messages {
-      border: 1px solid #000000;
+      border: 1px solid #dfdfdf;
       padding: 15px;
       margin-bottom: 15px;
+      overflow: scroll;
+      height: 500px;
+      width: 100%;
     }
 
     .messages {
       flex-shrink: 1;
-      overflow: scroll;
-      height: 500px;
-      width: 100%;
     }
 
     .message {
