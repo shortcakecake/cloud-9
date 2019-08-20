@@ -24,6 +24,7 @@ body {
 
     .message {
       padding: 5px 0;
+      color: orange;
     }
     .message .member {
       display: inline-block;
@@ -47,7 +48,3 @@ body {
     .message-form__button {
       margin: 10px;
     }
-
-p {
-      color: orange;
-}
