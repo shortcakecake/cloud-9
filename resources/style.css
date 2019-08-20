@@ -47,3 +47,6 @@ body {
     .message-form__button {
       margin: 10px;
     }
+p {
+      color: #ffb300;
+}
