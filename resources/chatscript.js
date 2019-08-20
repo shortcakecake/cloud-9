@@ -9,7 +9,7 @@ const drone = new ScaleDrone(CLIENT_ID, {
 });
 
 let members = [];
-const room = drone.subscribe('observable-room');
+const room = drone.subscribe('observable-room', { historyCount: 100 });
 drone.on('open', error => {
   if (error) {
     return console.error(error);
