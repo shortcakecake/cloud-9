@@ -4,7 +4,7 @@ const CLIENT_ID = 'mWce2OJGr3nCwHSm';
 const drone = new ScaleDrone(CLIENT_ID, {
   data: {
     name: username,
-    color: #065fd4,
+    color: "#065fd4",
   },
 });
 
