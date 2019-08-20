@@ -1,123 +1,125 @@
-    connected = document.getElementById("connected");
-    log = document.getElementById("log");
-    chat = document.getElementById("chat");
-    form = chat.form;
-    state = document.getElementById("status");
-	var messagealert = new Audio('message.mp3');
-	var erroralert = new Audio('error.mp3');
-	var connectedalert = new Audio('connected.mp3');
+var username = prompt("Preferred Name:");
+const CLIENT_ID = 'mWce2OJGr3nCwHSm';
 
-    if (window.WebSocket === undefined)
-    {
-        state.innerHTML = "sockets not supported";
-        state.className = "fail";
-    }
-    else
-    {
-        if (typeof String.prototype.startsWith != "function")
-        {
-            String.prototype.startsWith = function (str)
-            {
-                return this.indexOf(str) == 0;
-            };
-        }
-    
-        window.addEventListener("load", onLoad, false);
-    }
-	
-    function onLoad()
-    {
-        var wsUri = "ws://127.0.0.1:443";
-        websocket = new WebSocket(wsUri);
-		websocket.binaryType = 'arraybuffer';
-        websocket.onopen = function(evt) { onOpen(evt) };
-        websocket.onclose = function(evt) {  onClose(evt) };
-        websocket.onmessage = function(evt) { onMessage(evt) };
-        websocket.onerror = function(evt) { onError(evt) };
-		document.getElementById("serverip").innerText = "Current server: 127.0.0.1";
-    }
-  
-    function onOpen(evt)
-    {
-        state.className = "success";
-        state.innerHTML = "Connected to server!";
-		websocket.send("This user has connected to the server.");
-		document.getElementById("connectbutton").innerText = "Disconnect";
-		document.getElementById("ipinputbox").value = "";
-		connectedalert.play();
-    }
-  
-    function onClose(evt)
-    {
-        state.className = "fail";
-        state.innerHTML = "Not connected, please either refresh page or type in IP Address in input box below and press 'Connect'.";
-        connected.innerHTML = "0";
-		websocket.send("This user has disconnected to the server.");
-		document.getElementById("connectbutton").innerText = "Connect";
-		document.getElementById("log").innerHTML = "";
-		document.getElementById("serverip").innerText = "Current server: null";
-    }
-  
-    function onMessage(evt)
-    {
-		var message = evt.data;
-		
-        if (message.startsWith("log:"))
-        {
-            message = message.slice("log:".length);
-            log.innerHTML = '<li class="message" id="messages">' + message + "</li>" + log.innerHTML;
-        }
-        else if (message.startsWith("connected:"))
-        {
-            message = message.slice("connected:".length);
-            connected.innerHTML = message;	
-        }
-		messagealert.play();
-    }
+const drone = new ScaleDrone(CLIENT_ID, {
+  data: {
+    name: username,
+    color: getRandomColor(),
+  },
+});
 
-    function onError(evt)
-    {
-        state.className = "fail";
-        state.innerHTML = "Communication error";	
-		websocket.send("This user has crashed.");
-		document.getElementById("connectbutton").innerText = "Connect";
-		erroralert.play();
+let members = [];
+
+drone.on('open', error => {
+  if (error) {
+    return console.error(error);
+  }
+  console.log('Connecting to Online Chat Server...');
+
+  const room = drone.subscribe('observable-room');
+  room.on('open', error => {
+    if (error) {
+      return console.error(error);
     }
-	
-    function addMessage()
-    {
-        var message = chat.value;
-		if (message == "" || message == " " || message.startsWith(" ", 0) || message.endsWith(" ", 150))
-		{
-			erroralert.play();
-			alert("Illegal value for text message.\nPlease type something else.\n\nType of illegal messages include empty messages and messages that include only spaces.");
-		}
-		else
-		{
-			chat.value = "";
-			websocket.send(message);
-		}
-    }	
-	
-	function reload()
-    {
-		onClose();
-		document.getElementById("connectbutton").innerText = "Connect";
-		var ipaddress = document.getElementById("ipinputbox").value
-        var wsUri = "ws://" + ipaddress + ":443";
-        websocket = new WebSocket(wsUri);
-		websocket.onopen = function(evt) { onOpen(evt) };
-        websocket.onclose = function(evt) {  onClose(evt) };
-        websocket.onmessage = function(evt) { onMessage(evt) };
-        websocket.onerror = function(evt) { onError(evt) };
-		document.getElementById("connectbutton").innerText = "Disonnect";
-		document.getElementById("ipinputbox").value = "";
-		document.getElementById("serverip").innerText = "Current server: " + ipaddress;
+    console.log('Connected.');
+  });
+
+  room.on('members', m => {
+    members = m;
+    updateMembersDOM();
+  });
+
+  room.on('member_join', member => {
+    members.push(member);
+    updateMembersDOM();
+  });
+
+  room.on('member_leave', ({id}) => {
+    const index = members.findIndex(member => member.id === id);
+    members.splice(index, 1);
+    updateMembersDOM();
+  });
+
+  room.on('data', (text, member) => {
+    if (member) {
+      addMessageToListDOM(text, member);
+    } else {
+      // Message is from server
     }
-	
-	function ipenter(e) {
-    if (e.keyCode == 13) {
-		reload();
-        return false;
-    }
+  });
+});
+
+drone.on('close', event => {
+  console.log('Connection was closed', event);
+});
+
+drone.on('error', error => {
+  console.error(error);
+});
+
+drone.on('authenticate', function (error) {
+  if (error) return console.error(error);  
+  // Client is now authenticated and ready to start working
+});
+
+function getRandomColor() {
+  return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
+}
+
+//------------- DOM STUFF
+
+const DOM = {
+  membersCount: document.querySelector('.members-count'),
+  membersList: document.querySelector('.members-list'),
+  messages: document.querySelector('.messages'),
+  input: document.querySelector('.message-form__input'),
+  form: document.querySelector('.message-form'),
+};
+
+DOM.form.addEventListener('submit', sendMessage);
+
+function sendMessage() {
+  const value = DOM.input.value;
+  if (value === '') {
+    return;
+  }
+  DOM.input.value = '';
+  drone.publish({
+    room: 'observable-room',
+    message: value,
+  });
+}
+
+function createMemberElement(member) {
+  const { name, color } = member.clientData;
+  const el = document.createElement('div');
+  el.appendChild(document.createTextNode(name));
+  el.className = 'member';
+  el.style.color = color;
+  return el;
+}
+
+function updateMembersDOM() {
+  DOM.membersCount.innerText = `${members.length} users in room:`;
+  DOM.membersList.innerHTML = '';
+  members.forEach(member =>
+    DOM.membersList.appendChild(createMemberElement(member))
+  );
+}
+
+function createMessageElement(text, member) {
+  const el = document.createElement('div');
+  el.appendChild(createMemberElement(member));
+  el.appendChild(document.createTextNode(text));
+  el.className = 'message';
+  return el;
+}
+
+function addMessageToListDOM(text, member) {
+  const el = DOM.messages;
+  const wasTop = el.scrollTop === el.scrollHeight - el.clientHeight;
+  el.appendChild(createMessageElement(text, member));
+  if (wasTop) {
+    el.scrollTop = el.scrollHeight - el.clientHeight;
+  }
 }
