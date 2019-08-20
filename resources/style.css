@@ -18,7 +18,7 @@ body {
     .messages {
       flex-shrink: 1;
       overflow: scroll;
-      height: 80%;
+      height: 500px;
       width: 100%;
     }
 
