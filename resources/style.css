@@ -13,6 +13,7 @@ body {
       border: 1px solid #dfdfdf;
       padding: 15px;
       margin-bottom: 15px;
+      color: orange;
     }
 
     .messages {
