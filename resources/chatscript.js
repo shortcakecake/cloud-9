@@ -52,7 +52,7 @@ drone.on('error', error => {
 });
 drone.on('close', event => {
   console.log('Connection closed:', event);
-});
+})
 
 function getRandomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
