@@ -120,7 +120,7 @@ function createMessageElement(text, member) {
   el.appendChild(createMemberElement(member));
   const colon = document.createElement('div');
   colon.className = "member";
-  colon.innerText = ": ";
+  colon.innerHTML = ": ";
   el.appendChild(document.createTextNode(text));
   el.className = 'message';
   return el;
