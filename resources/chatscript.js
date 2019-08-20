@@ -118,7 +118,9 @@ function updateMembersDOM() {
 function createMessageElement(text, member) {
   const el = document.createElement('div');
   el.appendChild(createMemberElement(member));
-  el.appendChild(document.createTextNode(":"));
+  const colon = document.creatElement('div');
+  colon.className = "member";
+  colon.innerText = ": ";
   el.appendChild(document.createTextNode(text));
   el.className = 'message';
   return el;
@@ -132,3 +134,10 @@ function addMessageToListDOM(text, member) {
     el.scrollTop = el.scrollHeight - el.clientHeight;
   }
 }
+
+window.onbeforeunload = function(){
+  drone.publish({
+    room: 'observable-room',
+    message: "This user has disconnected.",
+  });
+};
