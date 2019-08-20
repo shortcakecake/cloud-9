@@ -80,6 +80,16 @@ function sendMessage() {
     room: 'observable-room',
     message: value,
   });
+  if (Notification.permission === "granted") {
+    var notification = new Notification(value);
+  }
+  else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(function (permission) {
+      if (permission === "granted") {
+        var notification = new Notification(value);
+      }
+    });
+  }
 }
 
 function createMemberElement(member) {
