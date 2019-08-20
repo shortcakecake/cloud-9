@@ -9,14 +9,12 @@ const drone = new ScaleDrone(CLIENT_ID, {
 });
 
 let members = [];
-
+const room = drone.subscribe('observable-room');
 drone.on('open', error => {
   if (error) {
     return console.error(error);
   }
   console.log('Connecting to Online Chat Server...');
-
-  const room = drone.subscribe('observable-room');
   room.on('open', error => {
     if (error) {
       return console.error(error);
@@ -49,18 +47,12 @@ drone.on('open', error => {
   });
 });
 
-drone.on('close', event => {
-  console.log('Connection was closed', event);
-});
-
 drone.on('error', error => {
-  console.error(error);
+  console.error('Error with connection:', error);
 });
-
-drone.on('authenticate', function (error) {
-  if (error) return console.error(error);  
-  // Client is now authenticated and ready to start working
-});
+drone.on('close', event => {
+  console.log('Connection closed:', event);
+}
 
 function getRandomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
