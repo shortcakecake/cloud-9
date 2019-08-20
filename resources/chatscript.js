@@ -88,36 +88,14 @@ function sendMessage() {
   const value = DOM.input.value;
   if (value === '') {
     return;
+  } else if (value === ' ') {
+    return;
   }
   DOM.input.value = '';
   drone.publish({
     room: 'observable-room',
     message: value,
   });
-  $(window).blur(function(){
-  if (Notification.permission === "granted") {
-    var notification = new Notification(value);
-  }
-  else if (Notification.permission !== "denied") {
-    Notification.requestPermission().then(function (permission) {
-      if (permission === "granted") {
-        var notification = new Notification(value);
-      }
-    });
-  }
-});
-$(window).focus(function(){
-  if (Notification.permission === "granted") {
-    var notification = new Notification(value);
-  }
-  else if (Notification.permission !== "denied") {
-    Notification.requestPermission().then(function (permission) {
-      if (permission === "granted") {
-        var notification = new Notification(value);
-      }
-    });
-  }
-});
 }
 
 function createMemberElement(member) {
