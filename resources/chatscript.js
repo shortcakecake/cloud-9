@@ -94,6 +94,7 @@ function sendMessage() {
     room: 'observable-room',
     message: value,
   });
+  $(window).blur(function(){
   if (Notification.permission === "granted") {
     var notification = new Notification(value);
   }
@@ -104,6 +105,19 @@ function sendMessage() {
       }
     });
   }
+});
+$(window).focus(function(){
+  if (Notification.permission === "granted") {
+    var notification = new Notification(value);
+  }
+  else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(function (permission) {
+      if (permission === "granted") {
+        var notification = new Notification(value);
+      }
+    });
+  }
+});
 }
 
 function createMemberElement(member) {
