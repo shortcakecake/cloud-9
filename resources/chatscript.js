@@ -116,14 +116,30 @@ function updateMembersDOM() {
 }
 
 function createMessageElement(text, member) {
-  const el = document.createElement('div');
-  el.appendChild(createMemberElement(member));
-  const colon = document.createElement('div');
-  colon.className = "member";
-  colon.innerHTML = ": ";
-  el.appendChild(document.createTextNode(text));
-  el.className = 'message';
-  return el;
+  if (text.includes("image:") == true)
+  {
+    const el = document.createElement('div');
+    el.appendChild(createMemberElement(member));
+    const image = document.createElement('img');
+    image.src = text.replace("image:", "");
+    return el;
+  }
+  else if (text.includes("video:") == true)
+  {
+    const el = document.createElement('div');
+    el.appendChild(createMemberElement(member));
+    const video = document.createElement('img');
+    image.src = text.replace("video:", "");
+    return el;
+  }
+  else
+  {
+    const el = document.createElement('div');
+    el.appendChild(createMemberElement(member));
+    el.appendChild(document.createTextNode(text));
+    el.className = 'message';
+    return el;
+  }
 }
 
 function addMessageToListDOM(text, member) {
