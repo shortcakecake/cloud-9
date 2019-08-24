@@ -119,17 +119,19 @@ function createMessageElement(text, member) {
   if (text.includes("image:") == true)
   {
     const el = document.createElement('div');
+    const image = document.createElement('image');
+    const url = text.replace("image:", "");
     el.appendChild(createMemberElement(member));
-    const image = document.createElement('img');
-    image.src = text.replace("image:", "");
+    image.src = url;
     return el;
   }
   else if (text.includes("video:") == true)
   {
     const el = document.createElement('div');
+    const video = document.createElement('video');
+    const url = text.replace("video:", "");
     el.appendChild(createMemberElement(member));
-    const video = document.createElement('img');
-    image.src = text.replace("video:", "");
+    video.src = url;
     return el;
   }
   else
