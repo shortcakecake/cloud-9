@@ -28,12 +28,13 @@ drone.on('open', error => {
   if (error) {
     return console.error(error);
   }
-  console.log('Connecting to Online Chat Server...');
+  console.log('Connecting to Chat Server...');
   room.on('open', error => {
     if (error) {
       return console.error(error);
     }
     console.log('Connected.');
+    document.getElementById("connection-status").innerText
   });
 
   room.on('members', m => {
@@ -61,16 +62,16 @@ drone.on('open', error => {
   });
 });
 
-drone.on('error', error => {
-  console.error('Error with connection:', error);
+drone.on('error', () => {
+  console.error("Connection error.");
 });
-drone.on('close', event => {
-  console.log('Connection closed:', event);
+drone.on('close', () => {
+  console.log("Connection closed.");
 });
 
-function getRandomColor() {
-  return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
-}
+drone.on('disconnect', () => {
+  console.log("Disconnected from server, reconnecting...");
+});
 
 //------------- DOM STUFF
 
