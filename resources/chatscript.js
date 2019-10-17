@@ -131,7 +131,7 @@ function createMessageElement(text, member) {
   if (text.includes("image:") == true)
   {
     const el = document.createElement('div');
-    const image = document.createElement('image');
+    var image = document.createElement('image');
     var url = text.replace("image:", "");
     el.appendChild(createMemberElement(member));
     image.src = url;
