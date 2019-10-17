@@ -49,3 +49,15 @@ body {
     .message-form__button {
       margin: 10px;
     }
+
+.connected {
+      color: #32a84c;
+}
+
+.error {
+      color: #e32e1e;
+}
+
+.connecting {
+      color: #ffae00;
+}
