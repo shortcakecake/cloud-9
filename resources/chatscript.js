@@ -34,7 +34,7 @@ drone.on('open', error => {
       return console.error(error);
     }
     console.log('Connected.');
-    document.getElementById("connection-status").innerText
+    document.getElementById("connection-status").innerText = "Connected"
   });
 
   room.on('members', m => {
@@ -64,13 +64,16 @@ drone.on('open', error => {
 
 drone.on('error', () => {
   console.error("Connection error.");
+  document.getElementById("connection-status").innerText = "Error"
 });
 drone.on('close', () => {
   console.log("Connection closed.");
+  document.getElementById("connection-status").innerText = "Connection terminated"
 });
 
 drone.on('disconnect', () => {
   console.log("Disconnected from server, reconnecting...");
+  document.getElementById("connection-status").innerText = "Reconnecting..."
 });
 
 //------------- DOM STUFF
