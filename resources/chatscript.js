@@ -135,6 +135,7 @@ function createMessageElement(text, member) {
     const url = text.replace("image:", "");
     el.appendChild(createMemberElement(member));
     image.src = url;
+    el.appendChild(createMemberElement(image));
     return el;
   }
   else if (text.includes("video:") == true)
@@ -144,6 +145,7 @@ function createMessageElement(text, member) {
     const url = text.replace("video:", "");
     el.appendChild(createMemberElement(member));
     video.src = url;
+    el.appendChild(createMemberElement(video));
     return el;
   }
   else
