@@ -134,8 +134,8 @@ function createMessageElement(text, member) {
     var image = document.createElement('image');
     var url = text.replace("image:", "");
     el.appendChild(createMemberElement(member));
-    image.src = url;
-    el.appendChild(createElement(image));
+    image.href = url;
+    el.appendChild(createMemberElement(image));
     return el;
   }
   else if (text.includes("video:") == true)
