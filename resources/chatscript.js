@@ -27,8 +27,10 @@ const room = drone.subscribe('observable-room', { historyCount: 10 });
 drone.on('open', error => {
   if (error) {
     return console.error(error);
+    document.getElementById("connection-status").innerText = "Error"
   }
   console.log('Connecting to Chat Server...');
+  document.getElementById("connection-status").innerText = "Connecting..."
   room.on('open', error => {
     if (error) {
       return console.error(error);
