@@ -27,18 +27,18 @@ const room = drone.subscribe('observable-room', { historyCount: 10 });
 drone.on('open', error => {
   if (error) {
     return console.error(error);
-    document.getElementById("connection-status").innerText = "Client Status: Error";
+    document.getElementById("connection-status").innerText = "Error";
     document.getElementById("connection-status").className = "error";
   }
   console.log('Connecting to Chat Server...');
-  document.getElementById("connection-status").innerText = "Client Status: Connecting..."
+  document.getElementById("connection-status").innerText = "Connecting..."
   document.getElementById("connection-status").className = "connecting";
   room.on('open', error => {
     if (error) {
       return console.error(error);
     }
     console.log('Connected.');
-    document.getElementById("connection-status").innerText = "Client Status: Connected"
+    document.getElementById("connection-status").innerText = "Connected"
     document.getElementById("connection-status").className = "connected";
   });
 
@@ -74,13 +74,13 @@ drone.on('error', () => {
 });
 drone.on('close', () => {
   console.log("Connection closed.");
-  document.getElementById("connection-status").innerText = "Client Status: Connection terminated"
+  document.getElementById("connection-status").innerText = "Connection terminated"
   document.getElementById("connection-status").className = "error";
 });
 
 drone.on('disconnect', () => {
   console.log("Disconnected from server, reconnecting...");
-  document.getElementById("connection-status").innerText = "Client Status: Reconnecting..."
+  document.getElementById("connection-status").innerText = "Reconnecting..."
   document.getElementById("connection-status").className = "connecting";
 });
 
