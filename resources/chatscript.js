@@ -135,7 +135,7 @@ function createMessageElement(text, member) {
     var url = text.replace("image:", "");
     el.appendChild(createMemberElement(member));
     image.src = url;
-    el.appendChild(createMemberElement(image));
+    el.appendChild(createElement(image));
     return el;
   }
   else if (text.includes("video:") == true)
