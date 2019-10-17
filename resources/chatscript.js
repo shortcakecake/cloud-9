@@ -132,7 +132,7 @@ function createMessageElement(text, member) {
   {
     const el = document.createElement('div');
     const image = document.createElement('image');
-    const url = text.replace("image:", "");
+    var url = text.replace("image:", "");
     el.appendChild(createMemberElement(member));
     image.src = url;
     el.appendChild(createMemberElement(image));
