@@ -128,34 +128,11 @@ function updateMembersDOM() {
 }
 
 function createMessageElement(text, member) {
-  if (text.includes("image:") == true)
-  {
-    const el = document.createElement('div');
-    var image = document.createElement('image');
-    var url = text.replace("image:", "");
-    el.appendChild(createMemberElement(member));
-    image.href = url;
-    el.appendChild(createMemberElement(image));
-    return el;
-  }
-  else if (text.includes("video:") == true)
-  {
-    const el = document.createElement('div');
-    const video = document.createElement('video');
-    const url = text.replace("video:", "");
-    el.appendChild(createMemberElement(member));
-    video.src = url;
-    el.appendChild(createMemberElement(video));
-    return el;
-  }
-  else
-  {
     const el = document.createElement('div');
     el.appendChild(createMemberElement(member));
     el.appendChild(document.createTextNode(text));
     el.className = 'message';
     return el;
-  }
 }
 
 function addMessageToListDOM(text, member) {
