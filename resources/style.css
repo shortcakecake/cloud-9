@@ -19,7 +19,7 @@ body {
     .messages {
       flex-shrink: 1;
       overflow: scroll;
-      height: 50%;
+      height: 30%;
       width: 100%;
     }
 
