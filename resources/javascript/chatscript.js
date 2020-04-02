@@ -163,7 +163,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		unread++;
 		if (unread > 0)
 		{
-			document.getElementsByTagName("title")[0].innerText = "Chat Client (" + unread + ")";
+			document.getElementsByTagName("title")[0].innerText = "(" + unread + ") Chat Client";
 		}
 		Push.create("Chat Server - " + sender, {
 			body: message,
