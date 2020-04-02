@@ -14,6 +14,7 @@ if (username == null)
 }
 
 var unread = 0;
+var messagecount = 0;
 
 const CLIENT_ID = 'mWce2OJGr3nCwHSm';
 
@@ -141,6 +142,7 @@ function responsiveChat(element) {
 }
 
 function responsiveChatPush(element, sender, origin, date, message) {
+	messagecount++;
     var originClass;
     if (origin == 'me') {
         originClass = 'myMessage';
@@ -171,7 +173,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
-	document.getElementsByClassName(element)[0].scrollIntoView();
+	document.getElementsByClassName(element)[messagecount].scrollIntoView();
 }
 
 if (Push.Permission.has())
