@@ -176,7 +176,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 	document.getElementById(messagecount).scrollIntoView(true);
     	setTimeout(function () {
         	$('#divcontent').animate({
-            		scrollTop: $("#divcontent").offset().top
+            		scrollTop: $('"#' + messagecount + '"').offset().top
         	}, 500);
     	}, 200);
 }
