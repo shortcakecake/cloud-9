@@ -149,7 +149,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
     } else {
         originClass = 'fromThem';
     }
-    $(element + ' .messages').append('<div class="message"><div class="' + originClass + '"><p>' + message + '</p><date><b>' + sender + '</b> ' + date + '</date></div></div>');
+    $(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div class="' + originClass + '"><p>' + message + '</p><date><b>' + sender + '</b> ' + date + '</date></div></div>');
 	if (!document.hasFocus())
 	{
 		unread++;
@@ -173,7 +173,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
-	document.getElementsByClassName("message")[messagecount].scrollTop = document.getElementsByClassName("message")[messagecount].scrollHeight;
+	document.getElementsByClassName(messagecount).scrollTop = document.getElementsByClassName(messagecount).scrollHeight;
 }
 
 if (Push.Permission.has())
