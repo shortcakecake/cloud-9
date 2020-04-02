@@ -174,7 +174,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		}
 		Push.create("Chat Server - " + sender, {
 			body: message,
-			icon: "resources/icon.ico",
+			icon: "resources/other/icon.ico",
 			tag: "Chat Server",
 			onClick: function () {
 				window.focus();
