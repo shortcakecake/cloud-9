@@ -146,7 +146,6 @@ function responsiveChat(element) {
 
 function responsiveChatPush(element, sender, origin, date, message) {
 	const el = "messages";
-	const wasTop = el.scrollTop === el.scrollHeight - el.clientHeight;
     var originClass;
     if (origin == 'me') {
         originClass = 'myMessage';
@@ -169,6 +168,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 			},
 		});
 	}
+	el.scrollTop = el.scrollHeight;
 }
 
 if (Push.Permission.has())
