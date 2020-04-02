@@ -63,7 +63,6 @@ drone.on('open', error => {
 			}
 			else {
 				responsiveChatPush('.chat', member.clientData.name, 'you', clock, text);
-				el.scrollTop = el.scrollHeight;
 			}
 		} else {
 		  // Message is from server
@@ -125,7 +124,7 @@ function responsiveChat(element) {
     $(element).html('<form class="chat"><span></span><div class="messages"></div><input id="message-form__input" type="text" placeholder="iMessage"><input id="message-form__button" type="submit" value="Send"></form>');
 
     function showLatestMessage() {
-        $(element).find('.messages').scrollTop($(element).find('.messages').height());
+        window.scrollTo(0,document.getElementsByClassName("messages")[0].scrollHeight);
     }
     showLatestMessage();
 
