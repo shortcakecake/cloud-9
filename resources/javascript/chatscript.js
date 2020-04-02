@@ -178,6 +178,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 	else {
 		unread = 0;
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
+		document.getElementById("favicon").href = "resources/other/icon-unread.ico";
 	}
 	el.scrollTop = el.scrollHeight;
 }
