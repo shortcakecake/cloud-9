@@ -13,6 +13,8 @@ if (username == null)
   location.reload();
 }
 
+var unread = 0;
+
 const CLIENT_ID = 'mWce2OJGr3nCwHSm';
 
 const drone = new ScaleDrone(CLIENT_ID, {
@@ -158,6 +160,11 @@ function responsiveChatPush(element, sender, origin, date, message) {
 	}
 	if (!document.hasFocus())
 	{
+		unread++;
+		if (unread > 0)
+		{
+			document.getElementsByTagName("title")[0].innerText = "Chat Client (" + unread + ")";
+		}
 		Push.create("Chat Server - " + sender, {
 			body: message,
 			icon: "resources/icon.ico",
@@ -167,6 +174,10 @@ function responsiveChatPush(element, sender, origin, date, message) {
 				this.close();
 			},
 		});
+	}
+	else {
+		unread = 0;
+		document.getElementsByTagName("title")[0].innerText = "Chat Client";
 	}
 	el.scrollTop = el.scrollHeight;
 }
