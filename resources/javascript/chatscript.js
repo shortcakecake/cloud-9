@@ -164,6 +164,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		if (unread > 0)
 		{
 			document.getElementsByTagName("title")[0].innerText = "(" + unread + ") Chat Client";
+			document.getElementById("favicon").href = "resources/other/icon-unread.ico";
 		}
 		Push.create("Chat Server - " + sender, {
 			body: message,
@@ -178,7 +179,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 	else {
 		unread = 0;
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
-		document.getElementById("favicon").href = "resources/other/icon-unread.ico";
+		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
 	el.scrollTop = el.scrollHeight;
 }
