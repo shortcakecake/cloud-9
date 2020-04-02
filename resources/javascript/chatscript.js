@@ -174,6 +174,11 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
 	document.getElementById(messagecount).scrollIntoView(true);
+    	setTimeout(function () {
+        	$('#divcontent').animate({
+            		scrollTop: $("#divcontent").offset().top
+        	}, 500);
+    	}, 200);
 }
 
 if (Push.Permission.has())
