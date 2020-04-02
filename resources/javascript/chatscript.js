@@ -44,6 +44,7 @@ drone.on('open', error => {
     document.getElementById("connection-status").className = "connected";
   });
 	room.on('data', (text, member) => {
+		const el = "messages";
 		if (member) {
 			var d = new Date();
 			var hour = d.getHours();
@@ -62,6 +63,7 @@ drone.on('open', error => {
 			}
 			else {
 				responsiveChatPush('.chat', member.clientData.name, 'you', clock, text);
+				el.scrollTop = el.scrollHeight;
 			}
 		} else {
 		  // Message is from server
@@ -147,7 +149,6 @@ function responsiveChat(element) {
 }
 
 function responsiveChatPush(element, sender, origin, date, message) {
-	const el = "messages";
     var originClass;
     if (origin == 'me') {
         originClass = 'myMessage';
@@ -178,7 +179,6 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
-	el.scrollTop = el.scrollHeight;
 }
 
 if (Push.Permission.has())
