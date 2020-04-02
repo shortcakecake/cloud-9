@@ -142,7 +142,7 @@ function responsiveChat(element) {
 }
 
 function responsiveChatPush(element, sender, origin, date, message) {
-	messagecount++;
+	messagecount = document.getElementsByClassName("message").length;
     var originClass;
     if (origin == 'me') {
         originClass = 'myMessage';
@@ -173,7 +173,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
-    	$("html, body").animate({ scrollTop: 5000 }, 2000);
+    	$("html, #" + messagecount + ").animate({ scrollTop: 5000 }, 2000);
 }
 
 if (Push.Permission.has())
