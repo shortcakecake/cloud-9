@@ -124,7 +124,16 @@ function responsiveChat(element) {
     $(element).html('<form class="chat"><span></span><div class="messages"></div><input id="message-form__input" type="text" placeholder="iMessage"><input id="message-form__button" type="submit" value="Send"></form>');
 
     function showLatestMessage() {
-        window.scrollTo(0,document.getElementsByClassName("messages")[0].scrollHeight);
+        var scrolled = false;
+	function updateScroll(){
+    		if(!scrolled){
+        		var element = document.getElementsByClassName("messages")[0];
+        		element.scrollTop = element.scrollHeight;
+    		}
+	}
+	$(".messages").on('scroll', function(){
+    		scrolled=true;
+	});
     }
     showLatestMessage();
 
