@@ -109,7 +109,7 @@ form.chat .myMessage:after {
   right: -42px;
   width: 12px;
   height: 20px;
-  background: white;
+  background: #fafafa;
   border-bottom-left-radius: 10px;
   -webkit-transform: translate(-30px, -2px);
   transform: translate(-30px, -2px);
