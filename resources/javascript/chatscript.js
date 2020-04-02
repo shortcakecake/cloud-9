@@ -173,12 +173,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
-	document.getElementById(messagecount).scrollIntoView(true);
-    	setTimeout(function () {
-        	$('#divcontent').animate({
-            		scrollTop: $('"#' + messagecount + '"').offset().top
-        	}, 500);
-    	}, 200);
+    	$("html, body").animate({ scrollTop: 5000 }, 2000);
 }
 
 if (Push.Permission.has())
