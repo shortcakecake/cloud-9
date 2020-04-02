@@ -155,9 +155,6 @@ function responsiveChatPush(element, sender, origin, date, message) {
         originClass = 'fromThem';
     }
     $(element + ' .messages').append('<div class="message"><div class="' + originClass + '"><p>' + message + '</p><date><b>' + sender + '</b> ' + date + '</date></div></div>');
-	if (wasTop) {
-		el.scrollTop = el.scrollHeight - el.clientHeight;
-	}
 	if (!document.hasFocus())
 	{
 		unread++;
