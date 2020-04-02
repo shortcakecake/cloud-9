@@ -159,9 +159,9 @@ function responsiveChatPush(element, sender, origin, date, message) {
 	}
 	if (!document.hasFocus())
 	{
-		Push.create(origin, {
+		Push.create("Chat Server - " + sender, {
 			body: message,
-			icon: '@Url.Content("resources/icon.ico")',
+			icon: "resources/icon.ico",
 			tag: "Chat Server",
 			onClick: function () {
 				window.focus();
