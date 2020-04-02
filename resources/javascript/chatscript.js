@@ -123,12 +123,6 @@ function updateMembersDOM() {
 function responsiveChat(element) {
     $(element).html('<form class="chat"><span></span><div class="messages"></div><input id="message-form__input" type="text" placeholder="iMessage"><input id="message-form__button" type="submit" value="Send"></form>');
 
-    function showLatestMessage() {
-        $(".messages").scrollTop($(".messages")[0].scrollHeight);
-    }
-    showLatestMessage();
-
-
     $(element + ' input[type="text"]').keypress(function (event) {
         if (event.which == 13) {
             event.preventDefault();
@@ -143,7 +137,6 @@ function responsiveChat(element) {
 			room: 'observable-room',
 			message: message,
 		});
-		showLatestMessage();
     });
 }
 
@@ -178,6 +171,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
+	document.getElementsByClassName(element)[0].scrollIntoView();
 }
 
 if (Push.Permission.has())
