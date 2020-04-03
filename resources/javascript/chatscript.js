@@ -106,7 +106,7 @@ drone.on('disconnect', () => {
 
 function createMemberElement(member) {
   const { name, color } = member.clientData;
-  const el = document.createElement('div');
+  const el = document.createElement('p');
   el.appendChild(document.createTextNode(name));
   el.className = 'member';
   el.style.color = color;
