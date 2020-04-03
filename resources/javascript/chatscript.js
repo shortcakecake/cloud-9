@@ -173,7 +173,8 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
-    	$("html, #" + messagecount).animate({ scrollTop: 5000 }, 2000);
+    	var objDiv = document.getElementsByClassName("messages")[0];
+     	objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 if (Push.Permission.has())
