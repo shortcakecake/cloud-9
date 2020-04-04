@@ -168,7 +168,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 			},
 		});
 	}
-    	$('.message:last-of-type').animate({scrollTop: $('.message:last-of-type').prop("scrollHeight")}, 500);
+    	$('.messages').animate({ scrollTop: $(".message:last").prop("scrollHeight") / 0.1}, 1000);
 }
 
 if (Push.Permission.has())
