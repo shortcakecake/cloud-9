@@ -43,6 +43,7 @@ drone.on('open', error => {
     console.log('Connected.');
     document.getElementById("connection-status").innerText = "Connected";
     document.getElementById("connection-status").className = "connected";
+    document.getElementById("message-form__input").focus();
   });
 	room.on('data', (text, member) => {
 		const el = "messages";
