@@ -168,11 +168,6 @@ function responsiveChatPush(element, sender, origin, date, message) {
 			},
 		});
 	}
-	else {
-		unread = 0;
-		document.getElementsByTagName("title")[0].innerText = "Chat Client";
-		document.getElementById("favicon").href = "resources/other/icon.ico";
-	}
     	var objDiv = document.getElementsByClassName("messages")[messagecount];
      	objDiv.scrollTop = objDiv.scrollHeight;
 }
@@ -182,11 +177,19 @@ if (Push.Permission.has())
 	Push.Permission.request();
 }
 
-responsiveChat('.messages');
-
 window.onbeforeunload = function(){
   drone.publish({
     room: 'observable-room',
     message: "This user has disconnected.",
   });
 };
+
+window.addEventListener("focusin", function() {
+	if (unread > 0)
+	{
+		unread = 0;
+		document.getElementsByTagName("title")[0].innerText = "Chat Client";
+		document.getElementById("favicon").href = "resources/other/icon.ico";
+	}
+}
+responsiveChat('.messages');
