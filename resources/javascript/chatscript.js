@@ -191,5 +191,5 @@ window.addEventListener("focusin", function() {
 		document.getElementsByTagName("title")[0].innerText = "Chat Client";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
-}
+});
 responsiveChat('.messages');
