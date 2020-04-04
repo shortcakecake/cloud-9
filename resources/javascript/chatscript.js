@@ -168,8 +168,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 			},
 		});
 	}
-    	var objDiv = document.getElementsByClassName("messages")[messagecount];
-     	objDiv.scrollTop = objDiv.scrollHeight;
+    	$('.message:last-of-type').animate({scrollTop: $('.message:last-of-type').prop("scrollHeight")}, 500);
 }
 
 if (Push.Permission.has())
