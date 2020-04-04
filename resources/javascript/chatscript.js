@@ -192,4 +192,13 @@ window.addEventListener("focusin", function() {
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
 });
+
+function toggleFullscreen() {
+	var element = document.body;
+	var isFullscreen = document.webkitIsFullScreen || document.mozFullScreen || false;
+	element.requestFullScreen = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || function () { return false; };
+	document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || function () { return false; };
+	isFullscreen ? document.cancelFullScreen() : element.requestFullScreen();
+}
+
 responsiveChat('.messages');
