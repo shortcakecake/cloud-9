@@ -138,6 +138,7 @@ function responsiveChat(element) {
 			room: 'observable-room',
 			message: message,
 		});
+	$('.messages').scrollTop($(".message:last").prop("scrollHeight") / 0.1);
     });
 }
 
@@ -168,7 +169,6 @@ function responsiveChatPush(element, sender, origin, date, message) {
 			},
 		});
 	}
-    	$('.messages').scrollTop($(".message:last").prop("scrollHeight") / 0.1);
 }
 
 if (Push.Permission.has())
