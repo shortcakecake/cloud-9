@@ -289,3 +289,12 @@ form.chat input[type='submit']{
 	font-size: 14px;
 	line-height: 0;
 }
+
+.members-list {
+	background-color: white;
+	position: fixed;
+	height: 3%;
+	width: 100%;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
