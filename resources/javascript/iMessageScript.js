@@ -7,11 +7,11 @@ if (username == null)
 {
   alert("Username must not be empty.");
   location.reload();
-}else if (username.includes(" ") == true)
-{
-  alert("Username are not allowed to have spaces in them.");
-  location.reload();
-}
+}//else if (username.includes(" ") == true)
+//{
+ // alert("Username are not allowed to have spaces in them.");
+  //location.reload();
+//}
 
 var unread = 0;
 var messagecount = 0;
