@@ -7,11 +7,7 @@ if (username == null)
 {
   alert("Username must not be empty.");
   location.reload();
-}//else if (username.includes(" ") == true)
-//{
- // alert("Username are not allowed to have spaces in them.");
-  //location.reload();
-//}
+}
 
 var unread = 0;
 var messagecount = 0;
@@ -199,6 +195,14 @@ function toggleFullscreen() {
 	element.requestFullScreen = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || function () { return false; };
 	document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || function () { return false; };
 	isFullscreen ? document.cancelFullScreen() : element.requestFullScreen();
+}
+
+function launchFaceTime() {
+	drone.publish({
+    		room: 'observable-room',
+    		message: "This user is switching to FaceTime...",
+  	});
+	window.location.href = "facetime.html";
 }
 
 responsiveChat('.messages');
