@@ -255,7 +255,7 @@ form.chat input[type='submit']{
 	width: 8%;
 	height: 100px;
 	float: left;
-	bottom: 0;
+	margin: 0;
 }
 
 .connected {
@@ -298,8 +298,4 @@ form.chat input[type='submit']{
 	width: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
-}
-
-p {
-	margin: 0;
 }
