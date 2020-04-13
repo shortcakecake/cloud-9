@@ -295,6 +295,6 @@ form.chat input[type='submit']{
 	position: fixed;
 	height: 3%;
 	width: 100%;
-	overflow-x: scroll;
-	overflow-y: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
