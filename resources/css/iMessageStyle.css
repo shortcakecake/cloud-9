@@ -294,7 +294,7 @@ form.chat input[type='submit']{
 .members-list {
 	background-color: white;
 	position: fixed;
-	height: 3%;
+	height: 4%;
 	width: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
