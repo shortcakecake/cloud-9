@@ -253,7 +253,7 @@ form.chat input[type='submit']{
 
 .member {
 	width: 8%;
-	height: 100px;
+	height: 16px;
 	float: left;
 	margin: 0;
 }
