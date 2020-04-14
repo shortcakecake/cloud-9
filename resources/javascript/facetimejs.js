@@ -55,10 +55,7 @@ room.on('members', m => {
  members = m;
  updateMembersDOM();
  startWebRTC(m.length);
- startListentingToSignals();
- for (var i = 0; i < (m.length - 1); i++){
-	 
- }
+ startListeningToSignals();
 });
 
   room.on('member_join', member => {
@@ -150,10 +147,13 @@ function startWebRTC(isOfferer) {
 
   // When a remote stream arrives display it in the #remoteVideo element
   pc.ontrack = event => {
-    const stream = event.streams[0];
-    if (!theirVideo.srcObject || theirVideo.srcObject.id !== stream.id) {
-      theirVideo.srcObject = stream;
-    }
+	  for (var i = 0; i < (members.length - 1); i++){
+		  var id = members[i].clientData.name;
+		  const stream = event.streams[i];
+		  if (!id.srcObject || id.srcObject.id !== stream.id) {
+			  id.srcObject = stream;
+		}
+	  }
   };
 
   navigator.mediaDevices.getUserMedia({
@@ -196,6 +196,30 @@ function localDescCreated(desc) {
     () => sendMessage({'sdp': pc.localDescription}),
     onError
   );
+}
+
+function startListeningToSignals() {
+ // Listen to signaling data from Scaledrone
+ room.on('data', (message, client) => {
+   // Message was sent by us
+   if (!client || client.id === drone.clientId) {
+     return;
+   }
+   if (message.sdp) {
+     // This is called after receiving an offer or answer from another peer
+     pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
+       // When receiving an offer lets answer it
+       if (pc.remoteDescription.type === 'offer') {
+         pc.createAnswer().then(localDescCreated).catch(onError);
+       }
+     }, onError);
+   } else if (message.candidate) {
+     // Add the new ICE candidate to our connections remote description
+     pc.addIceCandidate(
+       new RTCIceCandidate(message.candidate), onSuccess, onError
+     );
+   }
+ });
 }
 
 refreshVideo();
