@@ -61,13 +61,24 @@ room.on('members', m => {
   room.on('member_join', member => {
     members.push(member);
     updateMembersDOM();
-	refreshVideo();
+	  refreshVideo();
+	  for (var i = 0; i < members.length; i++){
+	  	var streamID = i - 1;
+		  const stream = event.streams[streamID];
+		  var videoStream = document.createElement("video");
+		  videoStream.id = i;
+		  videoStream.width = "300";
+		  videoStream.height = "200";
+		  videoStream.autoplay = "autoplay";
+		  document.getElementById("videoarea").appendChild(videoStream);
+	  }
   });
 
   room.on('member_leave', ({id}) => {
     const index = members.findIndex(member => member.id === id);
     members.splice(index, 1);
     updateMembersDOM();
+    document.getElementById(id).parentNode.removeChild(id);
   });
   
 function createMemberElement(member) {
@@ -148,14 +159,6 @@ function startWebRTC(isOfferer) {
   // When a remote stream arrives display it in the #remoteVideo element
   pc.onaddstream = event => {
 	  for (var i = 0; i < members.length; i++){
-		  var streamID = i - 1;
-		  const stream = event.streams[streamID];
-		  var videoStream = document.createElement("video");
-		  videoStream.id = i;
-		  videoStream.width = "300";
-		  videoStream.height = "200";
-		  videoStream.autoplay = "autoplay";
-		  document.getElementById("videoarea").appendChild(videoStream);
 		  if (!stream.srcObject || stream.srcObject.id !== stream.id) {
 			  videoStream.srcObject = stream;
 		}
