@@ -152,12 +152,12 @@ function startWebRTC(isOfferer) {
   // When a remote stream arrives display it in the #remoteVideo element
   pc.onaddstream = event => {
 	  for (var i = 0; i < isOfferer; i++){
-		  const stream = event.streams[0];
+		  const stream = event.streams[isOfferer];
 		  var videoStream = document.createElement("video");
-		  videoStream.id = isOfferer;
-		  videoStream.width = "300";
-		  videoStream.height = "200";
-		  videoStream.autoplay = "autoplay";
+		  videoStream.setAttribute("id", isOfferer);
+		  videoStream.setAttribute("width", "300");
+		  videoStream.setAttribute("height", "200");
+		  videoStream.setAttribute("autoplay", "");
 		  document.getElementById("videoarea").appendChild(videoStream);
 		  if (!videoStream.srcObject || videoStream.srcObject.id !== stream.id) {
 			  videoStream.srcObject = stream;
