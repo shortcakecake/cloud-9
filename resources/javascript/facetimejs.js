@@ -148,16 +148,16 @@ function startWebRTC(isOfferer) {
   // When a remote stream arrives display it in the #remoteVideo element
   pc.ontrack = event => {
 	  for (var i = 0; i < members.length; i++){
-		  var id = members[i - 1].clientData.name;
-		  const stream = event.streams[i - 1];
-		  if (!id.srcObject || id.srcObject.id !== stream.id) {
+		  var o = i - 1;
+		  const stream = event.streams[o];
+		  if (!o.srcObject || o.srcObject.id !== stream.id) {
 			  var videoStream = document.createElement("video");
-			  videoStream.id = id;
+			  videoStream.id = o;
 			  videoStream.width = "300";
 			  videoStream.height = "200";
 			  videoStream.autoplay = "autoplay";
 			  document.getElementById("videoarea").appendChild(videoStream);
-			  id.srcObject = stream;
+			  o.srcObject = stream;
 		}
 	  }
   };
