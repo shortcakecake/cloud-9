@@ -62,5 +62,6 @@ html {
 	margin-right: 15px;
 	background-color: black;
 	-webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
+    	transform: scaleX(-1);
+	border: 1px solid white;
 }
