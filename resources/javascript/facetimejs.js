@@ -1,3 +1,4 @@
+document.oncontextmenu = new Function("return false;")
 var username = prompt("Preferred Name:");
 if (username == null)
 {
