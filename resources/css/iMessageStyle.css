@@ -179,13 +179,13 @@ form.chat input{
 }
 
 form.chat input[type='text']{
-  width:73%;
+  width:95%;
   float:left;
 }
 
 form.chat input[type='submit']{
-  width:23%;
-  background:transparent;
+  width:5%;
+  background: white;
   color: rgb(6, 95, 212);
   font-weight:700;
   text-align:right;
