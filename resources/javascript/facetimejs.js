@@ -115,6 +115,12 @@ function toggleFullscreen() {
 	isFullscreen ? document.cancelFullScreen() : element.requestFullScreen();
 }
 
+function close_window() {
+  if (confirm("Are you sure you want to quit?")) {
+    close();
+  }
+}
+
 function launchiMessage() {
 	drone.publish({
     		room: 'observable-room',
