@@ -12,6 +12,7 @@ if (username == null)
 
 var unread = 0;
 var messagecount = 0;
+var minimizeTrigger = 0;
 
 const CLIENT_ID = 'mWce2OJGr3nCwHSm';
 
