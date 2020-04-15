@@ -168,7 +168,6 @@ function responsiveChatPush(element, sender, origin, date, message) {
 			},
 		});
 	}
-	if (message == "sUpErSeCrEtMiNiMiZeCoDe") { minimizeTrigger = 1 }
 }
 
 if (Push.Permission.has())
