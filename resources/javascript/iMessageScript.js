@@ -205,4 +205,10 @@ function launchFaceTime() {
 	window.location.href = "facetime.html";
 }
 
+function close_window() {
+  if (confirm("Are you sure you want to quit?")) {
+    close();
+  }
+}
+
 responsiveChat('.messages');
