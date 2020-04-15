@@ -17,7 +17,8 @@
 <div style='background-color: white;'>
 <div onselectstart="return false">
 <img style="height:2%;position: absolute;left: 5;top: 5;" id="close" src="resources/other/close.png" onmouseenter="document.getElementById(&quot;close&quot;).src = &quot;resources/other/close-hover.png&quot;;" onmouseleave="document.getElementById(&quot;close&quot;).src = &quot;resources/other/close.png&quot;;" onclick="close_window();">
-<img style="height:2%;position: absolute;left: 30;top: 5;" id="maximize" src="resources/other/maximize.png" onmouseenter="document.getElementById(&quot;maximize&quot;).src = &quot;resources/other/maximize-hover.png&quot;;" onmouseleave="document.getElementById(&quot;maximize&quot;).src = &quot;resources/other/maximize.png&quot;;" onclick="toggleFullscreen();">
+<img style="height:2%;position: absolute;left: 30;top: 5;" id="minimize" src="resources/other/maximize.png" onmouseenter="document.getElementById(&quot;minimize&quot;).src = &quot;resources/other/minimize-hover.png&quot;;" onmouseleave="document.getElementById(&quot;minimize&quot;).src = &quot;resources/other/minimize.png&quot;;" onclick="minimizeTrigger = 1;">
+<img style="height:2%;position: absolute;left: 55;top: 5;" id="maximize" src="resources/other/maximize.png" onmouseenter="document.getElementById(&quot;maximize&quot;).src = &quot;resources/other/maximize-hover.png&quot;;" onmouseleave="document.getElementById(&quot;maximize&quot;).src = &quot;resources/other/maximize.png&quot;;" onclick="toggleFullscreen();">
 <div class="container"><div class="centered" onclick="window.blur();">Chat Server</div>
 </div>
 <button id="FaceTimeLogin" onclick="launchFaceTime();" type="button">Launch FaceTime</button>
