@@ -118,7 +118,7 @@ function toggleFullscreen() {
 
 function close_window() {
   if (confirm("Are you sure you want to quit?")) {
-    open(location, '_self').close();
+    close();
   }
 }
 
