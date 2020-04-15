@@ -10,6 +10,8 @@ if (username == null)
   location.reload();
 }
 
+var minimizeTrigger = 0;
+
 const CLIENT_ID = 'DykEIjZu8e1n7atl';
 
 const drone = new ScaleDrone(CLIENT_ID, {
