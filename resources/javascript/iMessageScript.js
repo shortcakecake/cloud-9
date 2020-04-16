@@ -185,7 +185,7 @@ window.addEventListener("focusin", function() {
 	if (unread > 0)
 	{
 		unread = 0;
-		document.getElementsByTagName("title")[0].innerText = "Chat Client";
+		document.getElementsByTagName("title")[0].innerText = "Chat Client - iMessage";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
 });
