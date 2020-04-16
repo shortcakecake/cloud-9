@@ -156,7 +156,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		{
 			document.getElementsByTagName("title")[0].innerText = "(" + unread + ") Chat Client";
 			document.getElementById("favicon").href = "resources/other/icon-unread.ico";
-			_csharpjavascript.messagesUnread(unread);
+			_csharpjavascript.messagesUnread(unread, sender, date, message);
 		}
 		Push.create("Chat Server - " + sender, {
 			body: message,
