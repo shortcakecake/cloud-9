@@ -11,13 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="resources/javascript/push.min.js"></script>
 <script>
-const callEnabler = async function() {
-    await CefSharp.BindObjectAsync("_csharpjavascript", "bound");
-}
-const cefsharp_enable = async function() {
-  const result = await callEnabler();
-}
-cefsharp_enable();
+(async function() {await CefSharp.BindObjectAsync("_csharpjavascript", "bound");}
 </script>
 <link rel="stylesheet" href="resources/css/facetimecss.css">
 <link rel="shortcut icon" id="favicon" href="resources/other/icon.ico">
