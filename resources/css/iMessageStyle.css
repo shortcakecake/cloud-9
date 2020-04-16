@@ -54,10 +54,10 @@ form.chat ::-webkit-scrollbar-thumb {
 
 form.chat .message{
   display:block;
-  width:90%;
+  width:98%;
   padding:1%;
   padding-right: 0;
-  padding-left: 8;
+  padding-left: 0;
 }
 
 form.chat .message p{
