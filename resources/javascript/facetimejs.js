@@ -56,7 +56,6 @@ room.on('members', m => {
  members = m;
  updateMembersDOM();
  startWebRTC(m.length);
- startListeningToSignals();
 });
 
   room.on('member_join', member => {
