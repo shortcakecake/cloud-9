@@ -147,7 +147,7 @@ form.chat .fromThem:after {
   left: 4px;
   width: 26px;
   height: 20px;
-  background: white;
+  background: #ecf0f1;
   border-bottom-right-radius: 10px;
   -webkit-transform: translate(-30px, -2px);
   transform: translate(-30px, -2px);
