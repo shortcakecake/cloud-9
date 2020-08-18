@@ -1,4 +1,3 @@
-document.oncontextmenu = new Function("return false;")
 var username = prompt("Preferred Name:");
 if (username == null)
 {
@@ -12,6 +11,9 @@ if (username == null)
 
 var unread = 0;
 var messagecount = 0;
+var dropdown = document.getElementById("usersDropdown");
+var emoji_regex = /^(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|[\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|[\ud83c[\ude32-\ude3a]|[\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])+$/;
+const hasOnlyEmoji = str => emoji_regex.test(str);
 
 const CLIENT_ID = 'mWce2OJGr3nCwHSm';
 
@@ -23,7 +25,7 @@ const drone = new ScaleDrone(CLIENT_ID, {
 });
 
 let members = [];
-const room = drone.subscribe('observable-room', { historyCount: 10 });
+const room = drone.subscribe('observable-room');
 drone.on('open', error => {
   if (error) {
     return console.error(error);
@@ -112,7 +114,21 @@ function createMemberElement(member) {
 }
 
 function updateMembersDOM() {
-  document.getElementsByClassName("members-count")[0].innerText = `${members.length} users in room:`;
+	if (members.length == 1)
+	{
+		document.getElementsByClassName("members-count")[0].innerText = `${members.length} Person >`;
+		document.getElementById("usersIcon").src = "resources/other/1person.png";
+	}
+	else if (members.length == 2)
+	{
+		document.getElementsByClassName("members-count")[0].innerText = `${members.length} People >`;
+		document.getElementById("usersIcon").src = "resources/other/2people.png";
+	}
+	else if (members.length <= 3 || members.length == 3)
+	{
+		document.getElementsByClassName("members-count")[0].innerText = `${members.length} People >`;
+		document.getElementById("usersIcon").src = "resources/other/3people.png";
+	}
   document.getElementsByClassName("members-list")[0].innerHTML = '';
   members.forEach(member =>
     document.getElementsByClassName("members-list")[0].appendChild(createMemberElement(member))
@@ -120,7 +136,7 @@ function updateMembersDOM() {
 }
 
 function responsiveChat(element) {
-    $(element).html('<form class="chat"><span></span><div class="messages"></div><input id="message-form__input" type="text" placeholder="iMessage"><input id="message-form__button" type="submit" value="Send"></form>');
+    $(element).html('<form class="chat"><span></span><div class="messages"></div><input oncontextmenu="return false;" id="message-form__input" type="text" placeholder="iMessage"><input oncontextmenu="return false;" id="message-form__button" type="submit" value="Send"></form>');
 
     $(element + ' input[type="text"]').keypress(function (event) {
         if (event.which == 13) {
@@ -136,7 +152,7 @@ function responsiveChat(element) {
 			room: 'observable-room',
 			message: message,
 		});
-	$('.messages').scrollTop($(".message:last").prop("scrollHeight") / 0.1);
+	$('.messages').scrollTop($(".message:last").prop("scrollHeight") * 10);
     });
 }
 
@@ -148,7 +164,47 @@ function responsiveChatPush(element, sender, origin, date, message) {
     } else {
         originClass = 'fromThem';
     }
-    $(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div class="' + originClass + '"><p>' + message + '</p><date><b>' + sender + '</b> ' + date + '</date></div></div>');
+	if($(".message:last").children().hasClass("myMessage") == true)
+	{
+		if (hasOnlyEmoji(message) == true)
+		{
+			$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: right;"><p style="font-size: 20pt">' + message + '</p></div></div>');
+		}
+		else
+		{
+			$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div class="' + originClass + '"><p>' + message + '</p></div></div>');
+		}
+	}
+	else if ($(".message:last").children().hasClass("fromThem") == true)
+	{
+		if (hasOnlyEmoji(message) == true)
+		{
+			$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: left;"><p style="font-size: 20pt">' + message + '</p></div></div>');
+		}
+		else
+		{
+			$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div class="' + originClass + '"><p>' + message + '</p></div></div>');
+		}
+	}
+	else
+	{
+		if (hasOnlyEmoji(message) == true)
+		{
+			if (originClass == "myMessage")
+			{
+				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: right;"><p style="font-size: 20pt">' + message + '</p></div></div>');
+			}
+			else if (originClass == "fromThem")
+			{
+				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: left;"><p style="font-size: 20pt">' + message + '</p></div></div>');
+			}
+		}
+		else
+		{
+			$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div class="' + originClass + '"><p>' + message + '</p><date class="noselect"><b>' + sender + '</b> ' + date + '</date></div></div>');
+		}
+	}
+	
 	if (!document.hasFocus())
 	{
 		unread++;
@@ -158,7 +214,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 			document.getElementById("favicon").href = "resources/other/icon-unread.ico";
 			_csharpjavascript.messagesUnread(unread, sender, date, message);
 		}
-		Push.create("Chat Server - " + sender, {
+		var alert = new Notification("Chat Server - " + sender, {
 			body: message,
 			icon: "resources/other/icon.ico",
 			tag: "Chat Server",
@@ -170,9 +226,18 @@ function responsiveChatPush(element, sender, origin, date, message) {
 	}
 }
 
-if (Push.Permission.has())
+if (Notification.permission != "granted")
 {
-	Push.Permission.request();
+	Notification.requestPermission().then(permission => {
+		if (permission == "granted")
+		{
+			console.log("Notifications request accepted.");
+		}
+		else
+		{
+			console.error("Notification request denied.");
+		}
+	});
 }
 
 window.onbeforeunload = function(){
@@ -199,18 +264,62 @@ function toggleFullscreen() {
 	isFullscreen ? document.cancelFullScreen() : element.requestFullScreen();
 }
 
-function launchFaceTime() {
-	drone.publish({
-    		room: 'observable-room',
-    		message: "This user is switching to FaceTime...",
-  	});
-	window.location.href = "facetime.html";
-}
-
 function close_window() {
   if (confirm("Are you sure you want to quit?")) {
-    close();
+    window.close();
   }
 }
 
+function toggleUserDropdown() {
+	var dropdown = document.getElementById("usersDropdown");
+	var dropdowntext = document.getElementById("dropdown");
+	if (dropdown.style.display == "none")
+	{
+		dropdown.style.display = "block";
+		if (members.length == 1)
+		{
+			document.getElementsByClassName("members-count")[0].innerText = `${members.length} Person v`;
+			document.getElementById("usersIcon").src = "resources/other/1person.png";
+		}
+		else if (members.length == 2)
+		{
+			document.getElementsByClassName("members-count")[0].innerText = `${members.length} People v`;
+			document.getElementById("usersIcon").src = "resources/other/2people.png";
+		}
+		else if (members.length == 3 || members.length > 3)
+		{
+			document.getElementsByClassName("members-count")[0].innerText = `${members.length} People v`;
+			document.getElementById("usersIcon").src = "resources/other/3people.png";
+		}
+	}
+	else if (dropdown.style.display == "block")
+	{
+		dropdown.style.display = "none";
+		if (members.length == 1)
+		{
+			document.getElementsByClassName("members-count")[0].innerText = `${members.length} Person >`;
+			document.getElementById("usersIcon").src = "resources/other/1person.png";
+		}
+		else if (members.length == 2)
+		{
+			document.getElementsByClassName("members-count")[0].innerText = `${members.length} People >`;
+			document.getElementById("usersIcon").src = "resources/other/2people.png";
+		}
+		else if (members.length == 3 || members.length > 3)
+		{
+			document.getElementsByClassName("members-count")[0].innerText = `${members.length} People >`;
+			document.getElementById("usersIcon").src = "resources/other/3people.png";
+		}
+	}
+}
+
+function checkDropdown() 
+{
+	if (dropdown.style.display == "block")
+	{
+		toggleUserDropdown();
+	}
+}
+
 responsiveChat('.messages');
+dropdown.style.display = "none";

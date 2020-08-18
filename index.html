@@ -9,14 +9,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="resources/javascript/push.min.js"></script>
 <script>(async function() {await CefSharp.BindObjectAsync("_csharpjavascript", "bound")})();</script>
 <link rel="stylesheet" href="resources/css/iMessageStyle.css">
 <link rel="shortcut icon" id="favicon" href="resources/other/icon.ico">
 </head>
-<body>
+<body >
 <div style='background-color: white;'>
-<div onselectstart="return false">
+<div oncontextmenu="return false;" onclick='checkDropdown();'>
 <img style="height:2%;position: absolute;left: 10;top: 5;" id="close" src="resources/other/close.png" onmouseenter="document.getElementById(&quot;close&quot;).src = &quot;resources/other/close-hover.png&quot;;" onmouseleave="document.getElementById(&quot;close&quot;).src = &quot;resources/other/close.png&quot;;" onclick="close_window();return false;">
 <img style="height:2%;position: absolute;left: 35;top: 5;" id="minimize" src="resources/other/minimize.png" onmouseenter="document.getElementById(&quot;minimize&quot;).src = &quot;resources/other/minimize-hover.png&quot;;" onmouseleave="document.getElementById(&quot;minimize&quot;).src = &quot;resources/other/minimize.png&quot;;" onclick="_csharpjavascript.minimize();">
 <img style="height:2%;position: absolute;left: 60;top: 5;" id="maximize" src="resources/other/maximize.png" onmouseenter="document.getElementById(&quot;maximize&quot;).src = &quot;resources/other/maximize-hover.png&quot;;" onmouseleave="document.getElementById(&quot;maximize&quot;).src = &quot;resources/other/maximize.png&quot;;" onclick="toggleFullscreen();_csharpjavascript.maximize();">
@@ -24,15 +23,22 @@
 </div>
 <img src="resources/other/window.png" style="width:100%;height: 3.7%;">
 </div>
-<div id="top-section">
-<div>
+<div oncontextmenu="return false;" id="top-section">
+<center style="display:inline;">
+<div class="userDropdown">
+<img id="usersIcon" src="resources/other/1person.png" style="height: 40px; cursor: pointer;" onclick='toggleUserDropdown();'>
+<div id="dropdown" class="members-count noselect" onclick='toggleUserDropdown();'>0 people ></div>
+</div>
+<div id="usersDropdown" class="dropdown-content" onclick='toggleUserDropdown();'>
+<div class="members-list"></div>
+</div>
+</center>
+<div onclick='checkDropdown();'>
 <div style="display:inline;">Status:</div>
 <div id="connection-status" style="display:inline;"></div>
 </div>
-<div class="members-count">0 users in room:</div>
-<i><div class="members-list"></div></i>
 </div>
-<div class="border">
+<div class="border" onclick='checkDropdown();'>
 <div class="messages">
 </div>
 </div>
