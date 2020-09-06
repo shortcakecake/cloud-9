@@ -192,11 +192,11 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		{
 			if (originClass == "myMessage")
 			{
-				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: right;"><p style="font-size: 20pt">' + message + '</p></div></div>');
+				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: right;"><p style="font-size: 20pt">' + message + '</p><date class="noselect"><b>' + sender + '</b> ' + date + '</date></div></div>');
 			}
 			else if (originClass == "fromThem")
 			{
-				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: left;"><p style="font-size: 20pt">' + message + '</p></div></div>');
+				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: left;"><p style="font-size: 20pt">' + message + '</p><date class="noselect"><b>' + sender + '</b> ' + date + '</date></div></div>');
 			}
 		}
 		else
