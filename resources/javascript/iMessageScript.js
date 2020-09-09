@@ -158,12 +158,12 @@ function responsiveChat(element) {
 
 function responsiveChatPush(element, sender, origin, date, message) {
 	messagecount = document.getElementsByClassName("message").length;
-    var originClass;
-    if (origin == 'me') {
-        originClass = 'myMessage';
-    } else {
-        originClass = 'fromThem';
-    }
+	var originClass;
+	if (origin == 'me') {
+		originClass = 'myMessage';
+	} else {
+        	originClass = 'fromThem';
+	}
 	if($(".message:last").children().hasClass("myMessage") == true)
 	{
 		if (hasOnlyEmoji(message) == true)
@@ -214,15 +214,8 @@ function responsiveChatPush(element, sender, origin, date, message) {
 			document.getElementById("favicon").href = "resources/other/icon-unread.ico";
 			_csharpjavascript.messagesUnread(unread, sender, date, message);
 		}
-		var alert = new Notification("Chat Server - " + sender, {
-			body: message,
-			icon: "resources/other/icon.ico",
-			tag: "Chat Server",
-			onClick: function () {
-				window.focus();
-				this.close();
-			},
-		});
+		var options = { body: message, icon: "resources/other/icon.ico", onClick: function(event){ window.focus(); }, tag: "Chat Client" };
+		var alertNotification = new Notification("Chat Client - " + sender, options);
 	}
 }
 
