@@ -32,7 +32,7 @@ drone.on('open', error => {
     document.getElementById("connection-status").innerText = "Error";
     document.getElementById("connection-status").className = "error";
   }
-  console.log('Connecting to Chat Server...');
+  console.log('Connecting to Cloud-9...');
   document.getElementById("connection-status").innerText = "Connecting...";
   document.getElementById("connection-status").className = "connecting";
   room.on('open', error => {
@@ -215,7 +215,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 			_csharpjavascript.messagesUnread(unread, sender, date, message);
 		}
 		var options = { body: message, icon: "resources/other/icon.ico", onClick: function(event){ window.focus(); }, tag: "Chat Client" };
-		var alertNotification = new Notification("Chat Client - " + sender, options);
+		var alertNotification = new Notification("Cloud-9 - " + sender, options);
 	}
 }
 
@@ -244,7 +244,7 @@ window.addEventListener("focusin", function() {
 	if (unread > 0)
 	{
 		unread = 0;
-		document.getElementsByTagName("title")[0].innerText = "Chat Client - iMessage";
+		document.getElementsByTagName("title")[0].innerText = "Cloud-9 - iMessage";
 		document.getElementById("favicon").href = "resources/other/icon.ico";
 	}
 });
