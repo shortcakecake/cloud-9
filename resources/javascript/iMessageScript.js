@@ -164,7 +164,7 @@ function responsiveChatPush(element, sender, origin, date, message) {
 	} else {
         	originClass = 'fromThem';
 	}
-	if($(".message:last").children().hasClass("myMessage") == true)
+	/*if($(".message:last").children().hasClass("myMessage") == true)
 	{
 		if (hasOnlyEmoji(message) == true)
 		{
@@ -187,23 +187,23 @@ function responsiveChatPush(element, sender, origin, date, message) {
 		}
 	}
 	else
-	{
+	{*/
 		if (hasOnlyEmoji(message) == true)
 		{
 			if (originClass == "myMessage")
 			{
-				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: right;"><p style="font-size: 20pt">' + message + '</p><date class="noselect"><b>' + sender + '</b> ' + date + '</date></div></div>');
+				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div class="' + originClass + '"><p style="font-size: 20pt">' + message + '</p><date class="noselect"><b>' + sender + '</b> ' + date + '</date></div></div>');
 			}
 			else if (originClass == "fromThem")
 			{
-				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div style="float: left;"><p style="font-size: 20pt">' + message + '</p><date class="noselect"><b>' + sender + '</b> ' + date + '</date></div></div>');
+				$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div class="' + originClass + '"><p style="font-size: 20pt">' + message + '</p><date class="noselect"><b>' + sender + '</b> ' + date + '</date></div></div>');
 			}
 		}
 		else
 		{
 			$(element + ' .messages').append('<div class="message" id="' + messagecount + '"><div class="' + originClass + '"><p>' + message + '</p><date class="noselect"><b>' + sender + '</b> ' + date + '</date></div></div>');
 		}
-	}
+	//}
 	
 	if (!document.hasFocus())
 	{
